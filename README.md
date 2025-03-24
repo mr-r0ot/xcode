@@ -4,6 +4,10 @@ XCode Is a COOL Code Editor! only html,css,js editor! with Terminal, more OS, Py
 ## Use Online
 Test Online and Free In https://mr-r0ot.github.io/xcode/
 
+## Options
+Xcode run only in yout browser! memory, python, html, terminal, os,... all in your browser!
+Xcode have Memory, Python&Html Runner, Terminal, OS(Android,Linux,etc..), Debug(for js), etc....
+
 
 ## Xcode Photos
 
