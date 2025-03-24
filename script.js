@@ -32,7 +32,7 @@ let fileSystem = {
       fileSystem.children.push({
         type: "file",
         name: "welcome.txt",
-        content: "Welcome to X Code!\n\nTry commands like ls, cd, pwd, echo, mkdir, touch, rm, mv, or run a Python file with: python welcome.txt",
+        content: "Welcome to X Code!\n\nFree, secure, beatiful, modern, open source, accessible, innovative Code Editor\nAll in your browser!\nCoded By Mohammad Taha Gorji\n    GitHub: mr-r0ot\n       WebPage: mr-r0ot.github.io",
         id: generateId()
       });
       saveFileSystem();
