@@ -1,0 +1,492 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+
+/* Base settings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.a-link {
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.fancy-link {
+  display: inline-block;
+  position: relative;
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.fancy-link:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(52, 152, 219, 0.2);
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.fancy-link:hover {
+  color: #fff;
+  background-color: #3498db;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.fancy-link:hover:before {
+  width: 200%;
+  height: 500%;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: #1e1e1e;
+  color: #ccc;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Activity Bar */
+.activity-bar {
+  width: 50px;
+  background: #222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.activity-bar .logo {
+  color: #fff;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.activity-bar ul {
+  list-style: none;
+}
+
+.activity-bar li {
+  width: 40px;
+  height: 40px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 10px;
+  color: #ccc;
+  transition: background 0.3s;
+}
+
+.activity-bar li:hover,
+.activity-bar li.active {
+  background: #007acc;
+}
+
+.panel-label {
+  font-size: 8px;
+  margin-top: 2px;
+}
+
+/* Main Area */
+.main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tab Bar */
+.tab-bar {
+  height: 40px;
+  background: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  border-bottom: 1px solid #000;
+  color: #fff;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+#run-preview-btn,
+#terminal-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Content Area */
+.content-area {
+  flex: 1;
+  display: flex;
+}
+
+/* Explorer Panel */
+.explorer-panel {
+  width: 250px;
+  background: #292929;
+  border-right: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+}
+
+.explorer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #444;
+  color: #fff;
+}
+
+.explorer-actions button {
+  background: transparent;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  margin-left: 5px;
+  font-size: 16px;
+}
+
+/* File Tree */
+#file-tree {
+  list-style: none;
+  padding: 10px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+#file-tree li {
+  padding: 6px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: background 0.3s;
+}
+
+#file-tree li:hover,
+#file-tree li.selected {
+  background: #094771;
+}
+
+.toggle-btn {
+  position: absolute;
+  left: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 10px;
+  user-select: none;
+}
+
+/* Editor Panel */
+.editor-panel {
+  flex: 1;
+  background: #1e1e1e;
+  position: relative;
+  overflow: auto;
+}
+
+/* Search Bar */
+.search-bar {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #444;
+  padding: 6px;
+  align-items: center;
+  z-index: 10;
+}
+
+.search-bar input {
+  margin-right: 6px;
+  padding: 4px;
+  border: 1px solid #666;
+  background: #222;
+  color: #ccc;
+}
+
+.search-bar button {
+  margin-right: 6px;
+  background: #007acc;
+  border: none;
+  color: #fff;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+/* Mobile Preview for HTML */
+.mobile-preview {
+  width: 375px;
+  height: 70%;
+  border: 16px solid #000;
+  border-top-width: 60px;
+  border-bottom-width: 60px;
+  border-radius: 36px;
+  margin: 20px auto;
+  position: relative;
+  background: #fff;
+}
+
+.mobile-preview iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.close-preview-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #007acc;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Terminal Styles - شاهکار با پس‌زمینه مشکی و فونت سفید سایبری */
+.terminal-container {
+  background: #000;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Ubuntu Mono', monospace;
+  color: #fff;
+}
+
+.terminal-header {
+  background: #111;
+  padding: 10px 15px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #555;
+}
+
+.terminal-back-btn {
+  background: #222;
+  border: none;
+  color: #fff;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.3s;
+}
+
+.terminal-back-btn:hover {
+  background: #444;
+}
+
+.terminal-output-area {
+  flex: 1;
+  background: #000;
+  padding: 12px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #fff;
+}
+
+.terminal-input-wrapper {
+  background: #000;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  border-top: 2px solid #555;
+}
+
+.terminal-prompt {
+  margin-right: 8px;
+  color: #fff;
+}
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 14px;
+  font-family: 'Ubuntu Mono', monospace;
+  caret-color: #fff;
+}
+
+/* Blinking Cursor Effect */
+.terminal-input {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from, to { border-right-color: transparent; }
+  50% { border-right-color: #fff; }
+}
+
+/* Terminal Line */
+.terminal-line {
+  margin: 4px 0;
+}
+
+/* Terminal Back Button in Preview */
+.close-terminal-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #007acc;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Spinner for Server Panel */
+.spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.loader {
+  border: 8px solid #444;
+  border-top: 8px solid #007acc;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+.loading-text {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #007acc;
+}
+.loading-dots {
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error Message for Server Panel */
+.error-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #ff4444;
+  font-size: 16px;
+  text-align: center;
+}
+.error-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+/* Status Bar */
+.status-bar {
+  height: 24px;
+  background: #007acc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  font-size: 12px;
+  color: #fff;
+}
+
+.status-actions button,
+.status-actions select {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* Context Menu */
+.context-menu {
+  position: absolute;
+  background: #292929;
+  border: 1px solid #444;
+  display: none;
+  z-index: 1000;
+  width: 150px;
+}
+
+.context-menu ul {
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+}
+
+.context-menu li {
+  padding: 5px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.3s;
+}
+
+.context-menu li:hover {
+  background: #094771;
+}
+
+/* Source Control Buttons Styling */
+.sc-btn {
+  background: linear-gradient(135deg, #6a5acd, #00bfff);
+  border: none;
+  color: #fff;
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+.sc-btn:hover {
+  background: linear-gradient(135deg, #5a4cac, #009acd);
+}
+
+/* Footer */
+footer {
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 8px;
+  font-size: 12px;
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X Code Editor</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- CodeMirror CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+  <!-- CodeMirror Addons CSS for autocomplete and linting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/show-hint.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/lint.min.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Activity Bar -->
+    <div class="activity-bar">
+      <div class="logo">X</div>
+      <ul>
+        <li data-panel="explorer" title="Explorer" class="active">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <path fill="#ccc" d="M3 3h18v18H3z"/>
+          </svg>
+          <span class="panel-label">Explorer</span>
+        </li>
+        <li data-panel="search" title="Search">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8" stroke="#ccc" stroke-width="2"/>
+            <line x1="16" y1="16" x2="21" y2="21" stroke="#ccc" stroke-width="2"/>
+          </svg>
+          <span class="panel-label">Search</span>
+        </li>
+        <li data-panel="source-control" title="Source Control">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="#ccc" stroke-width="2"/>
+            <path d="M12 2v20" stroke="#ccc" stroke-width="2"/>
+            <path d="M2 12h20" stroke="#ccc" stroke-width="2"/>
+          </svg>
+          <span class="panel-label">SC</span>
+        </li>
+        <li data-panel="server" title="Server">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="4" fill="#ccc"/>
+            <rect x="3" y="10" width="18" height="4" fill="#ccc"/>
+            <rect x="3" y="16" width="18" height="4" fill="#ccc"/>
+          </svg>
+          <span class="panel-label">Server</span>
+        </li>
+      </ul>
+      <!-- Toggle Errors Button -->
+      <button id="toggle-errors-btn" title="Toggle Errors" class="sc-btn"></button>
+    </div>
+    <!-- Main Area -->
+    <div class="main-area">
+      <!-- Tab Bar with Run and Terminal Buttons -->
+      <div class="tab-bar">
+        <a href="https://github.com/mr-r0ot"><span class="fancy-link" style="color: #f1f1f1;">workspace - By MohammadTahaGorji</span></a>
+        <div class="tab-buttons">
+          <button id="run-preview-btn" title="Run">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <polygon points="5,3 19,12 5,21" fill="#ccc"/>
+            </svg>
+            <span class="panel-label">Run</span>
+          </button>
+          <button id="terminal-btn" title="Terminal">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="14" fill="none" stroke="#ccc" stroke-width="2"/>
+              <polyline points="7,9 11,13 7,17" fill="none" stroke="#ccc" stroke-width="2"/>
+              <line x1="13" y1="13" x2="17" y2="13" fill="none" stroke="#ccc" stroke-width="2"/>
+            </svg>
+            <span class="panel-label">Terminal</span>
+          </button>
+        </div>
+      </div>
+      <!-- Content Area -->
+      <div class="content-area">
+        <!-- Explorer Panel -->
+        <div class="explorer-panel" id="explorer-panel">
+          <div class="explorer-header">
+            <span>Explorer</span>
+            <div class="explorer-actions">
+              <button id="open-btn" title="Open">📂 Open</button>
+              <button id="new-folder-btn" title="New Folder">📁+</button>
+              <button id="new-file-btn" title="New File">📄+</button>
+            </div>
+          </div>
+          <ul id="file-tree">
+            <!-- Dynamically generated file tree -->
+          </ul>
+        </div>
+        <!-- Editor Panel / Dynamic Panels (HTML, Terminal, etc.) -->
+        <div class="editor-panel" id="editor-panel">
+          <!-- Search & Replace Bar -->
+          <div id="search-bar" class="search-bar">
+            <input type="text" id="search-input" placeholder="Search...">
+            <input type="text" id="replace-input" placeholder="Replace...">
+            <button id="find-next-btn">Find Next</button>
+            <button id="replace-btn">Replace</button>
+            <button id="replace-all-btn">Replace All</button>
+            <button id="close-search-btn">Close</button>
+          </div>
+          <textarea id="code-editor"></textarea>
+        </div>
+      </div>
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <span id="status">X Code</span>
+        <div class="status-actions">
+          <button id="rename-btn" title="Rename">Rename</button>
+          <button id="delete-btn" title="Delete">Delete</button>
+          <button id="download-btn" title="Download">Download</button>
+          <button id="upload-btn" title="Upload">Upload</button>
+          <select id="font-size-select" title="Font Size">
+            <option value="12px">12px</option>
+            <option value="14px" selected>14px</option>
+            <option value="16px">16px</option>
+            <option value="18px">18px</option>
+            <option value="20px">20px</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer>
+    coded by mohammad taha gorji
+  </footer>
+  <!-- Context Menu -->
+  <div id="context-menu" class="context-menu">
+    <ul>
+      <li id="context-rename">Rename</li>
+      <li id="context-delete">Delete</li>
+      <li id="context-download">Download</li>
+    </ul>
+  </div>
+  <!-- CodeMirror JS and Addons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/search/searchcursor.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/search/search.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/show-hint.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/javascript-hint.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jshint/2.13.4/jshint.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/lint.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/javascript-lint.min.js"></script>
+  <!-- Pyodide for Python execution -->
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
